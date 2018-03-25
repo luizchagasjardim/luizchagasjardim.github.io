@@ -2,6 +2,39 @@
 <html>
 <body>
 <h1>Marvel Puzzle Quest</h1>
-<p>Eu sou uma página.</p>
+	Character rank:
+	<select id="rank">
+		<option value=4>4 stars</option>
+		<option value=5>5 stars</option>
+	</select>
+	<br><br>
+	Number of covers in each power:
+	<br>
+	<input type="number" id="n1" min=0 max=5 value=0>
+	<input type="number" id="n2" min=0 max=5 value=0>
+	<input type="number" id="n3" min=0 max=5 value=0>
+	<br><br>
+	<input type="checkbox" id="latest" checked>Character is one of the latest
+	<br><br>
+	<input type="checkbox" id="bonus" checked>Character is selected as a bonus hero
+	<br><br>
+	Number of bonus heroes you have selected in that rank:
+	<br>
+	<input type="number" id="nBonus" min=0 value=1>
+	<br><br>
+	Number of pulls:
+	<br>
+	Latest: <input type="number" id="nLatestPulls" min=0 value=50>
+	<br>
+	Classic: <input type="number" id="nClassicPulls" min=0 value=50>
+	<br><br>
+	<button type="button" onclick="probability()">Submit</button>
+<p id="prob">Probability: </p>
+<!--p id="teste">Capas:<br></p-->
+<script>
+function probability() {
+
+}
+</script>
 </body>
 </html>
