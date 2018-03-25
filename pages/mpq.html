@@ -34,6 +34,104 @@
 <script>
 function probability() {
 
+	var p = 0;
+	var nTrials = 500000;
+	var latest = document.getElementById("latest").checked;
+	var rank = document.getElementById("rank").value;
+
+	//número de pulls e personagens
+	var nPulls;
+	var nChar;
+	if (rank == 4) {
+		if (latest) {
+			nChar = 12; //latest 4*
+		} else {
+			nChar = 53; //classic 4*
+		}
+		nPulls = Number(document.getElementById("nLatestPulls").value) + Number(document.getElementById("nClassicPulls").value);
+	} else if (rank == 5) {
+		if (latest) {
+			nChar = 3; //latest 5*
+			nPulls = Number(document.getElementById("nLatestPulls").value);
+		} else {
+			nChar = 20; //classic 5*
+			nPulls = Number(document.getElementById("nClassicPulls").value);
+		}
+	}
+	
+	//bonus
+	var bonus = document.getElementById("bonus").checked;
+	var nBonus = Number(document.getElementById("nBonus").value);
+
+	//trials
+	for (i=0; i<nTrials; i++) {
+
+		var n1 = Number(document.getElementById("n1").value);
+		var n2 = Number(document.getElementById("n2").value);
+		var n3 = Number(document.getElementById("n3").value);
+
+		for (j=0; j<nPulls; j++) {
+			//sorteia se é 4* ou 5*
+			var rand = Math.random();
+			if ((rank == 4 && rand > .15)||(rank == 5 && rand < .15)) {
+				//sorteia se é latest/classic no caso 4*
+				if (rank == 4 && Math.random() > .5) {
+					continue;
+				}
+				//sorteia se é o personagem
+				if (Math.random()*nChar < 1) {
+					//sorteia a capa
+					var capa = Math.floor(Math.random()*3 + 1);
+					//document.getElementById("teste").innerHTML += capa;
+					switch(capa) {
+						case(1):
+							if (n1 < 5) { n1++; }
+						break;
+						case(2):
+							if (n2 < 5) { n2++; }
+						break;
+						case(3):
+							if (n3 < 5) { n3++; }
+						break;
+						default:
+							p = NaN;
+					}
+					if (n1+n2+n3 == 13) {
+						p++;
+						break;
+					}
+				}
+				if (bonus && Math.random() < .05/nBonus) {
+					//sorteia a capa
+					var capa = Math.floor(Math.random()*3 + 1);
+					//document.getElementById("teste").innerHTML += capa;
+					switch(capa) {
+						case(1):
+							if (n1 < 5) { n1++; }
+						break;
+						case(2):
+							if (n2 < 5) { n2++; }
+						break;
+						case(3):
+							if (n3 < 5) { n3++; }
+						break;
+						default:
+							p = NaN;
+					}
+					if (n1+n2+n3 == 13) {
+						p++;
+						break;
+					}
+				}
+			}
+		}
+		//document.getElementById("teste").innerHTML += "<br>";
+	}
+	p *= 100;
+	p /= nTrials;
+	p = parseFloat(p).toFixed(2);
+	document.getElementById("prob").innerHTML = "Probability: " + p + "%";
+
 }
 </script>
 </body>
