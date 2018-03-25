@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Marvel Puzzle Quest</h1>
+	Character rank:
+	<select id="rank">
+		<option value=4>4 stars</option>
+		<option value=5>5 stars</option>
+	</select>
+	<br><br>
+	Number of covers in each power:
+	<br>
+	<input type="number" id="n1" min=0 max=5 value=0>
+	<input type="number" id="n2" min=0 max=5 value=0>
+	<input type="number" id="n3" min=0 max=5 value=0>
+	<br><br>
+	<input type="checkbox" id="latest" checked>Character is one of the latest
+	<br><br>
+	<input type="checkbox" id="bonus" checked>Character is selected as a bonus hero
+	<br><br>
+	Number of bonus heroes you have selected in that rank:
+	<br>
+	<input type="number" id="nBonus" min=0 value=1>
+	<br><br>
+	Number of pulls:
+	<br>
+	Latest: <input type="number" id="nLatestPulls" min=0 value=50>
+	<br>
+	Classic: <input type="number" id="nClassicPulls" min=0 value=50>
+	<br><br>
+	<button type="button" onclick="probability()">Submit</button>
+<p id="prob">Probability: </p>
+<!--p id="teste">Capas:<br></p-->
+<script>
+function probability() {
+
+	var p = 0;
+	var nTrials = 500000;
+	var latest = document.getElementById("latest").checked;
+	var rank = document.getElementById("rank").value;
+
+	//número de pulls e personagens
+	var nPulls;
+	var nChar;
+	if (rank == 4) {
+		if (latest) {
+			nChar = 12; //latest 4*
+		} else {
+			nChar = 53; //classic 4*
+		}
+		nPulls = Number(document.getElementById("nLatestPulls").value) + Number(document.getElementById("nClassicPulls").value);
+	} else if (rank == 5) {
+		if (latest) {
+			nChar = 3; //latest 5*
+			nPulls = Number(document.getElementById("nLatestPulls").value);
+		} else {
+			nChar = 20; //classic 5*
+			nPulls = Number(document.getElementById("nClassicPulls").value);
+		}
+	}
+	
+	//bonus
+	var bonus = document.getElementById("bonus").checked;
+	var nBonus = Number(document.getElementById("nBonus").value);
+
+	//trials
+	for (i=0; i<nTrials; i++) {
+
+		var n1 = Number(document.getElementById("n1").value);
+		var n2 = Number(document.getElementById("n2").value);
+		var n3 = Number(document.getElementById("n3").value);
+
+		for (j=0; j<nPulls; j++) {
+			//sorteia se é 4* ou 5*
+			var rand = Math.random();
+			if ((rank == 4 && rand > .15)||(rank == 5 && rand < .15)) {
+				//sorteia se é latest/classic no caso 4*
+				if (rank == 4 && Math.random() > .5) {
+					continue;
+				}
+				//sorteia se é o personagem
+				if (Math.random()*nChar < 1) {
+					//sorteia a capa
+					var capa = Math.floor(Math.random()*3 + 1);
+					//document.getElementById("teste").innerHTML += capa;
+					switch(capa) {
+						case(1):
+							if (n1 < 5) { n1++; }
+						break;
+						case(2):
+							if (n2 < 5) { n2++; }
+						break;
+						case(3):
+							if (n3 < 5) { n3++; }
+						break;
+						default:
+							p = NaN;
+					}
+					if (n1+n2+n3 == 13) {
+						p++;
+						break;
+					}
+				}
+				if (bonus && Math.random() < .05/nBonus) {
+					//sorteia a capa
+					var capa = Math.floor(Math.random()*3 + 1);
+					//document.getElementById("teste").innerHTML += capa;
+					switch(capa) {
+						case(1):
+							if (n1 < 5) { n1++; }
+						break;
+						case(2):
+							if (n2 < 5) { n2++; }
+						break;
+						case(3):
+							if (n3 < 5) { n3++; }
+						break;
+						default:
+							p = NaN;
+					}
+					if (n1+n2+n3 == 13) {
+						p++;
+						break;
+					}
+				}
+			}
+		}
+		//document.getElementById("teste").innerHTML += "<br>";
+	}
+	p *= 100;
+	p /= nTrials;
+	p = parseFloat(p).toFixed(2);
+	document.getElementById("prob").innerHTML = "Probability: " + p + "%";
+
+}
+</script>
+</body>
+</html>
