@@ -1,0 +1,177 @@
+\documentclass[a4paper,10pt]{article}
+
+%mudar a definição abaixo para alterar o tipo de currículo
+%valores possíveis:
+%d = developer
+%p = professor
+\newcommand{\cvtype}{d}
+
+%A Few Useful Packages
+\usepackage{marvosym}
+\usepackage{fontspec} 					%for loading fonts
+\usepackage{xunicode,xltxtra,url,parskip} 	%other packages for formatting
+\RequirePackage{color,graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[big]{layaureo} 				%better formatting of the A4 page
+% an alternative to Layaureo can be ** \usepackage{fullpage} **
+\usepackage{supertabular} 				%for Grades
+\usepackage{titlesec}					%custom \section
+
+%Setup hyperref package, and colours for links
+\usepackage{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
+
+%FONTS
+\defaultfontfeatures{Mapping=tex-text}
+%TODO \setmainfont[SmallCapsFont = Fontin SmallCaps]{Fontin}
+%%% modified for Karol Kozioł for ShareLaTeX use
+%\setmainfont[
+%SmallCapsFont = Fontin-SmallCaps.otf,
+%BoldFont = Fontin-Bold.otf,
+%ItalicFont = Fontin-Italic.otf
+%]
+%{Fontin.otf} 
+%%%
+
+%CV Sections inspired by: 
+%http://stefano.italians.nl/archives/26
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{3pt}{3pt}
+%Tweak a bit the top margin
+%\addtolength{\voffset}{-1.3cm}
+
+%Italian hyphenation for the word: ''corporations''
+\hyphenation{im-pre-se}
+
+%-------------WATERMARK TEST [**not part of a CV**]---------------
+\usepackage[absolute]{textpos}
+
+\setlength{\TPHorizModule}{30mm}
+\setlength{\TPVertModule}{\TPHorizModule}
+\textblockorigin{2mm}{0.65\paperheight}
+\setlength{\parindent}{0pt}
+
+%--------------------BEGIN DOCUMENT----------------------
+\begin{document}
+
+%WATERMARK TEST [**not part of a CV**]---------------
+%\font\wm=''Baskerville:color=787878'' at 8pt
+%\font\wmweb=''Baskerville:color=FF1493'' at 8pt
+%{\wm 
+%	\begin{textblock}{1}(0,0)
+%		\rotatebox{-90}{\parbox{500mm}{
+%			Typeset by Alessandro Plasmati with \XeTeX\  \today\ for 
+%			{\wmweb \href{http://www.aleplasmati.comuv.com}{aleplasmati.comuv.com}}
+%		}
+%	}
+%	\end{textblock}
+%}
+
+\pagestyle{empty} % non-numbered pages
+
+\font\fb=''[cmr10]'' %for use with \LaTeX command
+
+%--------------------TITLE-------------
+\par{\centering
+		{\Huge Luiz Guilherme Chagas Moraes \textsc{Jardim}
+	}\bigskip\par}
+
+%--------------------SECTIONS-----------------------------------
+%Section: Personal Data
+\section{Personal Data}
+
+\begin{tabular}{rl}
+    \textsc{Place and Date of Birth:} & Rio de Janeiro, RJ  | November 8th, 1989 \\
+    \textsc{Address:}   & Avenida Infante Dom Henrique, 418, R/C Esq. Frt.,\\& Vila Nova de Gaia, Porto, Portugal \\
+    \textsc{Phone:}     & +351 21 934 391 402\\
+    \textsc{email:}     & \href{mailto:luizchagasjardim@gmail.com}{luizchagasjardim@gmail.com} \\
+\end{tabular}
+
+\section{Presentation}
+Dear recruiters,
+
+\if \cvtype d
+%developer
+{\quad}I've been working as a developer for three years, programming mainly in \textbf{C++}, \textbf{Java} and recently \textbf{Python}. I have experience in many other technologies and also in leadership roles. What I enjoy the most in programming is documenting, writing unit tests and refactoring legacy code. My extensive background in Mathematics, Science and Education sometimes come in handy.
+
+{\quad}My goal is to learn as much as possible. Software development is a field where there are many multi	disciplinary projects with a lot different subjects and technologies to learn about. I also work on personal projects when I have the time, and document them on my blog. I try to use these projects also to come into contact with technologies I have not yet been able to work professionaly with.
+
+{\quad}\footnotesize{For more details, please go to \href{http://luizchagasjardim.github.io}{luizchagasjardim.github.io}}
+\else
+	\if \cvtype p
+%professor
+
+	\fi
+\fi
+
+%Section: Work Experience at the top
+\section{Work Experience}
+\begin{tabular}{r|p{11cm}}
+\textsc{June 2019} & Consultant at \textsc{Natixis} through \textsc{Altran}\\
+\textsc{Current} & Working on a financial software called Summit\\
+
+\multicolumn{2}{c}{}\\
+
+\textsc{March 2016} & Systems analyst at \textsc{Brazilian Navy Research Institute}\\
+\textsc{March 2019} & Development of a ship's engine room simulator for the Mercantile Navy\\&
+\footnotesize{Responsible for the control module (C++), mantaining the mathematical models (C++/Fortran) and communication between these components and the graphical interface (Java);}\\&
+\footnotesize{Also reponsible for the test module (C++/Java), which uses a .json file to simulate user operations and verifies the outcomes given by the models. It also checked the validity of \textsc{fxml}, \textsc{xml} and the database (Postgres). These tests were run using Gitlab's CI.}\\&
+\footnotesize{Modifications on the database (pgSQL), graphical interfaces (JavaFx) and model analysis (\textsc{xml}, Simulink).}\\
+
+\multicolumn{2}{c}{}\\
+
+\textsc{December 2015} & Temporary Professor at \textsc{Rio de Janeiro State University}\\
+\textsc{January 2015} & \footnotesize{Undergraduate Calculus and P.D.E.}\\
+
+\multicolumn{2}{c}{}\\
+
+\textsc{December 2011} & Tutor at \textsc{Rio de Janeiro State University}\\
+\textsc{January 2010} & \footnotesize{Undegraduate Calculus and Algebra.}\\&
+\footnotesize {Graduate Andvanced Calculus and Continuum Mechanics.}\\
+
+\multicolumn{2}{c}{}\\
+
+\textsc{December 2009} & Tutor at \textsc{Ph}\\
+\textsc{September 2009} & \footnotesize{Math tutor for middle school and high school}\\
+\end{tabular}
+
+%Section: Education
+\section{Education}
+\begin{tabular}{rl}
+
+\textsc{December} 2016 & \textsc{PhD in Mechanical Engineering}\\&
+\textbf{Universidade do Estado do Rio de Janeiro}, \textsc{PPGEM}\\&
+Research Area: Transport Phenomena\\&
+Thesis: “A hyperbolic model for saturated-unsaturated transition\\& simulation in porous media”\\&
+Advisor: Rogério Martins Saldanha da Gama, PhD.\\&
+Co-Advisor: José Julio Pedrosa Filho, PhD.\\
+\\
+\textsc{July 2014} & \textsc{MSc in Mechanical Engineering}\\&
+\textbf{Universidade do Estado do Rio de Janeiro}, \textsc{PPGEM}\\&
+Research Area: Transport Phenomena\\&
+Thesis: “A new description of mass tranfer in porous media with\\&
+saturated-unsaturated transition”\\&
+Advisor: Rogério Martins Saldanha da Gama, PhD.\\&
+Co-Advisor: José Julio Pedrosa Filho, PhD.\\
+\\
+December 2012 & \textsc{Undergraduate Degree in Mathematics}\\&
+\textbf{Universidade do Estado do Rio de Janeiro}, \textsc{IME}\\&
+Thesis: “Cauchy Stress Tensor”\\&
+Advisor: José Julio Pedrosa Filho, PhD.\\
+
+\end{tabular}
+
+%Section: Languages
+\section{Languages}
+\begin{tabular}{rl}
+\textsc{Brazilian Portuguese:}&Native\\
+\textsc{English:}&Advanced
+\end{tabular}
+
+%\newpage
+%\hypertarget{gmat}{\textsc{Gmat}\setmainfont{LMRoman10 Regular}\textregistered\setmainfont[SmallCapsFont=Fontin-SmallCaps]{Fontin-Regular}}
+
+%\XeTeXpdffile ''GMAT.pdf'' page 1 scaled 800
+
+\end{document}
