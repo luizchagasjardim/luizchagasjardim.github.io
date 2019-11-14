@@ -1,5 +1,5 @@
 ;(function () {
-	
+
 	'use strict';
 
 
@@ -49,9 +49,9 @@
 	var counterWayPoint = function() {
 		if ($('#colorlib-counter').length > 0 ) {
 			$('#colorlib-counter').waypoint( function( direction ) {
-										
+
 				if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-					setTimeout( counter , 400);					
+					setTimeout( counter , 400);
 					$(this.element).addClass('animated');
 				}
 			} , { offset: '90%' } );
@@ -64,7 +64,7 @@
 		$('.animate-box').waypoint( function( direction ) {
 
 			if( direction === 'down' && !$(this.element).hasClass('animated') ) {
-				
+
 				i++;
 
 				$(this.element).addClass('item-animate');
@@ -87,9 +87,9 @@
 							el.removeClass('item-animate');
 						},  k * 200, 'easeInOutExpo' );
 					});
-					
+
 				}, 100);
-				
+
 			}
 
 		} , { offset: '85%' } );
@@ -104,10 +104,10 @@
 
 			if ($('body').hasClass('offcanvas')) {
 				$this.removeClass('active');
-				$('body').removeClass('offcanvas');	
+				$('body').removeClass('offcanvas');
 			} else {
 				$this.addClass('active');
-				$('body').addClass('offcanvas');	
+				$('body').addClass('offcanvas');
 			}
 		});
 
@@ -126,9 +126,9 @@
 
     			$('body').removeClass('offcanvas');
     			$('.js-colorlib-nav-toggle').removeClass('active');
-			
+
 	    	}
-	    	
+
 	    }
 		});
 
@@ -137,7 +137,7 @@
 
     			$('body').removeClass('offcanvas');
     			$('.js-colorlib-nav-toggle').removeClass('active');
-			
+
 	    	}
 		});
 
@@ -182,9 +182,9 @@
 	var navigationSection = function() {
 
 		var $section = $('section[data-section]');
-		
+
 		$section.waypoint(function(direction) {
-		  	
+
 		  	if (direction === 'down') {
 		    	navActive($(this.element).data('section'));
 		  	}
@@ -208,7 +208,7 @@
 
 
 	var sliderMain = function() {
-		
+
 	  	$('#colorlib-hero .flexslider').flexslider({
 			animation: "fade",
 			slideshowSpeed: 5000,
@@ -256,9 +256,9 @@
 
 				$("#sticky_item").stick_in_parent();
 			}
-			
 
-			
+
+
 
 		});
 
@@ -288,6 +288,12 @@
 
 	// Document on load.
 	$(function(){
+		if (window.innerWidth < 1000) {
+			document.getElementById("slide1li").style.backgroundImage = "url(images/crafts1crop1bw-mobile.jpg)";
+			document.getElementById("slide1desc").innerHTML = "<h1>Luiz<br>Chagas<br>Jardim</h1><p><a class=\"btn btn-primary btn-learn\" href=\"files/curriculum.pdf\" download=\"curriculum.pdf\">Download CV <i class=\"icon-download4\"></i></a></p/>"; //I know this is ridiculous
+				document.getElementById("slide2li").style.backgroundImage = "url(images/crafts2-mobile.jpg)";
+				document.getElementById("slide2desc").innerHTML = "<h1>Software<br>Developer</h1><p><a class=\"btn btn-primary btn-learn\" href=\"files/curriculum.pdf\" download=\"curriculum.pdf\">Download CV <i class=\"icon-download4\"></i></a></p/>"; //I know this is ridiculous
+		}
 		fullHeight();
 		counter();
 		counterWayPoint();
